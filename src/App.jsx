@@ -23,6 +23,18 @@ const App = () => {
     setInputValue('');
   };
 
+  const handleDeleteTodo = id => {
+    setTodos(todos.filter(todo => todo.id !== id));
+  };
+
+  const handleToggleComplete = id => {
+    setTodos(
+      todos.map(todo =>
+        todo.id === id ? { ...todo, completed: !todo.completed } : todo
+      )
+    );
+  };
+
   return (
     <div className='App'>
       <h1>My To-Do</h1>
@@ -41,8 +53,19 @@ const App = () => {
 
       <ul className='todo-list'>
         {todos.map(todo => (
-          <li key={todo.id} className='todo-item'>
-            <span>{todo.text}</span>
+          <li
+            key={todo.id}
+            className={`todo-item ${todo.completed ? 'completed' : ''}`}
+          >
+            <span onClick={() => handleToggleComplete(todo.id)}>
+              {todo.text}
+            </span>
+            <button
+              onClick={() => handleDeleteTodo(todo.id)}
+              className='delete-btn'
+            >
+              Delete
+            </button>
           </li>
         ))}
       </ul>
