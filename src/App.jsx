@@ -1,8 +1,11 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './App.css';
 
 const App = () => {
-  const [todos, setTodos] = useState([]);
+  const [todos, setTodos] = useState(() => {
+    const savedTodos = localStorage.getItem('todos');
+    return savedTodos ? JSON.parse(savedTodos) : []
+  });
   const [inputValue, setInputValue] = useState('');
   const [filter, setFilter] = useState('all');
 
@@ -47,6 +50,10 @@ const App = () => {
     { label: 'Active', value: 'active' },
     { label: 'Completed', value: 'completed' },
   ];
+
+  useEffect(() => {
+    localStorage.setItem('todos', JSON.stringify(todos))
+  }, [todos])
 
   return (
     <div className='App'>
