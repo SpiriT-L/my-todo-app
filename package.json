@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://SpiriT-L.github.io/my-todo-app",
+  "homepage": "https://spiriT-l.github.io/my-todo-app",
   "scripts": {
     "dev": "vite --host",
     "build": "vite build",
