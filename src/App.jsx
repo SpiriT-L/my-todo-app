@@ -4,6 +4,7 @@ import './App.css';
 const App = () => {
   const [todos, setTodos] = useState([]);
   const [inputValue, setInputValue] = useState('');
+  const [filter, setFilter] = useState('all');
 
   const handleInputChange = e => {
     setInputValue(e.target.value);
@@ -35,10 +36,22 @@ const App = () => {
     );
   };
 
+  const filteredTodos = todos.filter(todo => {
+    if (filter === 'active') return !todo.completed;
+    if (filter === 'completed') return todo.completed;
+    return true;
+  });
+
+  const filterOptions = [
+    { label: 'All', value: 'all' },
+    { label: 'Active', value: 'active' },
+    { label: 'Completed', value: 'completed' },
+  ];
+
   return (
     <div className='App'>
       <h1>My To-Do</h1>
-      <form onSubmit={handleAddTodo}>
+      <form className='form' onSubmit={handleAddTodo}>
         <input
           className='todo-input'
           type='text'
@@ -50,9 +63,20 @@ const App = () => {
           Submit
         </button>
       </form>
+      <div className='filters'>
+        {filterOptions.map(({ label, value }) => (
+          <button
+            key={value}
+            onClick={() => setFilter(value)}
+            className={`filter-btn ${filter === value ? 'active' : ''}`}
+          >
+            {label}
+          </button>
+        ))}
+      </div>
 
       <ul className='todo-list'>
-        {todos.map(todo => (
+        {filteredTodos.map(todo => (
           <li
             key={todo.id}
             className={`todo-item ${todo.completed ? 'completed' : ''}`}
