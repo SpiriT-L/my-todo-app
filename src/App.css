@@ -19,6 +19,7 @@ body {
 
 .App {
   width: 100vw;
+  max-width: 1024px;
 }
 
 .container {
@@ -140,5 +141,4 @@ h1 {
 
 .filter-btn.active {
   background: linear-gradient(90deg, #357ae8 0%, #4f8cff 100%);
- 
 }
