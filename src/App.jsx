@@ -57,49 +57,51 @@ const App = () => {
 
   return (
     <div className='App'>
-      <h1>My To-Do</h1>
-      <form className='form' onSubmit={handleAddTodo}>
-        <input
-          className='todo-input'
-          type='text'
-          value={inputValue}
-          onChange={handleInputChange}
-          placeholder='What needs to be done?'
-        />
-        <button className='todo-btn' type='submit'>
-          Submit
-        </button>
-      </form>
-      <div className='filters'>
-        {filterOptions.map(({ label, value }) => (
-          <button
-            key={value}
-            onClick={() => setFilter(value)}
-            className={`filter-btn ${filter === value ? 'active' : ''}`}
-          >
-            {label}
+      <div className='container'>
+        <h1>My To-Do</h1>
+        <form className='form' onSubmit={handleAddTodo}>
+          <input
+            className='todo-input'
+            type='text'
+            value={inputValue}
+            onChange={handleInputChange}
+            placeholder='What needs to be done?'
+          />
+          <button className='todo-btn' type='submit'>
+            Submit
           </button>
-        ))}
-      </div>
-
-      <ul className='todo-list'>
-        {filteredTodos.map(todo => (
-          <li
-            key={todo.id}
-            className={`todo-item ${todo.completed ? 'completed' : ''}`}
-          >
-            <span onClick={() => handleToggleComplete(todo.id)}>
-              {todo.text}
-            </span>
+        </form>
+        <div className='filters'>
+          {filterOptions.map(({ label, value }) => (
             <button
-              onClick={() => handleDeleteTodo(todo.id)}
-              className='delete-btn'
+              key={value}
+              onClick={() => setFilter(value)}
+              className={`filter-btn ${filter === value ? 'active' : ''}`}
             >
-              Delete
+              {label}
             </button>
-          </li>
-        ))}
-      </ul>
+          ))}
+        </div>
+
+        <ul className='todo-list'>
+          {filteredTodos.map(todo => (
+            <li
+              key={todo.id}
+              className={`todo-item ${todo.completed ? 'completed' : ''}`}
+            >
+              <span onClick={() => handleToggleComplete(todo.id)}>
+                {todo.text}
+              </span>
+              <button
+                onClick={() => handleDeleteTodo(todo.id)}
+                className='delete-btn'
+              >
+                Delete
+              </button>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };
